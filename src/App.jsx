@@ -1,19 +1,17 @@
 import { Fragment, useState, useEffect } from "react";
 
+
 import { BookList } from "./components/BookList";
 import { Form } from "./components/Form";
 import { Navbars } from "./components/Navbars";
 
-
-
 function App() {
-  
-
   const [libros, setBooks] = useState([]); //listar libros
 
-  const [bookCreate, setBookCreate] = useState({  //crear libros
-    titulo: '',
-    autor: '',
+  const [bookCreate, setBookCreate] = useState({
+    //crear libros
+    titulo: "",
+    autor: "",
     edicion: 0,
   });
 
@@ -26,25 +24,27 @@ function App() {
 
   useEffect(() => {
     obtenerLibros();
-  }, [])
-  
+  }, []);
 
   return (
     <>
       <Fragment>
+
         <Navbars brand="Libros" />
-        <div className="container">
-          <div className="row">
 
-            <div className="col-7">
-              <h2 style={{textAlign:"center"}}>Lista de Libros</h2>
-              <BookList book={libros}/>
+        <div className="container mt-4">
+          <div className="row g-4">
+
+            <div className="col-lg-7 col-md-6 col-12">
+              <h2 className="text-center mb-5 mt-4">Lista de Libros</h2>
+              <BookList libroCreate={bookCreate} book={libros} />
             </div>
 
-            <div className="col-5">
-            <h2 style={{textAlign:"center"}}>Formulario de ibros</h2>
-            <Form libroCreate={bookCreate} setBooks={setBookCreate} actualizarLista={obtenerLibros}/>
+            <div className="col-lg-5 col-md-6 col-12">
+              <h2 className="text-center mb-5 mt-4">Formulario de Libros</h2>
+              <Form libroCreate={bookCreate} setBooks={setBookCreate} />
             </div>
+
           </div>
         </div>
       </Fragment>

@@ -1,4 +1,4 @@
-export const Form = ({libroCreate, setBooks, actualizarLista}) => {
+export const Form = ({libroCreate, setBooks}) => {
 
 
     const handleChange = (e) => {
@@ -37,7 +37,6 @@ export const Form = ({libroCreate, setBooks, actualizarLista}) => {
         .then((response) => response.json())
         .then(() => {
             alert("Libro guardado con exito");
-            actualizarLista();
             window.location.reload(); 
         });
 
@@ -52,18 +51,18 @@ export const Form = ({libroCreate, setBooks, actualizarLista}) => {
 
     
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="container mt-4">
             <div className="mb-3">
                 <label htmlFor="titulo" className="form-label">Titulo</label>
-                <input onChange={handleChange} type="text" className="form-control" name="titulo" id="titulo" />
+                <input value={titulo} onChange={handleChange} type="text" className="form-control" name="titulo" id="titulo" />
             </div>
             <div className="mb-3">
                 <label htmlFor="autor" className="form-label">Autor</label>
-                <input onChange={handleChange} type="text" className="form-control" name="autor" id="autor"/>
+                <input value={autor} onChange={handleChange} type="text" className="form-control" name="autor" id="autor"/>
             </div>
             <div className="mb-3">
                 <label htmlFor="edicion" className="form-label">Edicion</label>
-                <input  onChange={handleChange} type="number" className="form-control" name="edicion" id="edicion" />
+                <input value={edicion} onChange={handleChange} type="number" className="form-control" name="edicion" id="edicion" />
             </div>
             
             <button type="submit" className="btn btn-primary">Guardar</button>
