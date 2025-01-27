@@ -38,6 +38,7 @@ export const Form = ({libroCreate, setBooks, actualizarLista}) => {
         .then(() => {
             alert("Libro guardado con exito");
             actualizarLista();
+            window.location.reload(); 
         });
 
         setBooks({
