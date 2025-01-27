@@ -1,7 +1,6 @@
 export const Form = ({libroCreate, setBooks, actualizarLista}) => {
 
-    const API_URL = import.meta.env.VITE_API_URL;
-    
+
     const handleChange = (e) => {
         setBooks({
             ...libroCreate,
@@ -34,7 +33,7 @@ export const Form = ({libroCreate, setBooks, actualizarLista}) => {
 
        
 
-        fetch(API_URL, requesInit)
+        fetch("https://back-end-2-pg-render-book.onrender.com/api", requesInit)
         .then((response) => response.json())
         .then(() => {
             alert("Libro guardado con exito");

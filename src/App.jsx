@@ -1,7 +1,8 @@
 import { Fragment, useState, useEffect } from "react";
-import  { Navbar}  from "./components/navbar";
+
 import { BookList } from "./components/BookList";
-import { Form } from "./components/form";
+import { Form } from "./components/Form";
+import { Navbars } from "./components/Navbars";
 
 
 
@@ -16,11 +17,8 @@ function App() {
     edicion: 0,
   });
 
-  const API_URL = import.meta.env.VITE_API_URL;
-
-
   const obtenerLibros = () => {
-    fetch(API_URL)
+    fetch("https://back-end-2-pg-render-book.onrender.com/api")
       .then((response) => response.json())
       .then((data) => setBooks(data))
       .catch((error) => console.error("Error al obtener los libros:", error));
@@ -34,7 +32,7 @@ function App() {
   return (
     <>
       <Fragment>
-        <Navbar brand={"Marru"} />
+        <Navbars brand="Libros" />
         <div className="container">
           <div className="row">
 

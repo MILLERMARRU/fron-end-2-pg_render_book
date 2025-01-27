@@ -1,5 +1,4 @@
-
-export const Navbar = ({brand}) => {
+export const Navbars = ({ brand }) => {
   return (
     <>
       <nav className="navbar navbar-dark bg-dark">
@@ -10,6 +9,5 @@ export const Navbar = ({brand}) => {
         </div>
       </nav>
     </>
-   
   );
 };
