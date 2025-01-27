@@ -1,0 +1,44 @@
+html, body{
+    
+    background: linear-gradient(195deg, #eee7f7, #fdfdfd);
+    height: 100%;
+    margin: 0;
+    padding: 0;
+
+}
+
+h2 {
+    font-family: Georgia, serif;
+    font-weight: normal;
+    font-size: 20px;
+}
+
+
+.custom-hover:hover {
+    background: linear-gradient(130deg,#eee7f7,#a4cc83) !important; /* Cambia el color de fondo al pasar el mouse */
+    color: white !important;
+    transform: scale(1.05); /* Efecto de aumento */
+    transition: all 0.3s ease-in-out;
+    border: none;
+}
+  
+
+.btn-decor:hover{
+
+    background: #e4887c !important;
+    color: rgb(234, 241, 228) !important;
+    transition: all 0.3s ease-in-out;
+    border-radius: 5px;
+    border: 2px solid #ffffff;
+
+}
+
+.btn-decor-edit:hover{
+
+    background: #cde47c !important;
+    color: rgb(234, 241, 228) !important;
+    transition: all 0.3s ease-in-out;
+    border-radius: 5px;
+    border: 2px solid #ffffff;
+
+}

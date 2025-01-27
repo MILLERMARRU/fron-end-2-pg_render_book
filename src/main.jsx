@@ -5,6 +5,7 @@ import { createRoot } from 'react-dom/client'
 import 'bootstrap/dist/css/bootstrap.min.css';  // Estilos de Bootstrap
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';  // Componentes interactivos de Bootstrap
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import './css/style.css';  // Estilos personalizados  
 
 
 

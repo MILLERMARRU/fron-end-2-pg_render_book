@@ -30,18 +30,18 @@ function App() {
     <>
       <Fragment>
 
-        <Navbars brand="Libros" />
+        <Navbars brand="Marru Mar" />
 
         <div className="container mt-4">
           <div className="row g-4">
 
             <div className="col-lg-7 col-md-6 col-12">
-              <h2 className="text-center mb-5 mt-4">Lista de Libros</h2>
+              <h2 className="text-center mb-4 mt-5">Lista de Libros</h2>
               <BookList libroCreate={bookCreate} book={libros} />
             </div>
 
             <div className="col-lg-5 col-md-6 col-12">
-              <h2 className="text-center mb-5 mt-4">Formulario de Libros</h2>
+              <h2 className="text-center mb-4 mt-4">Formulario de Libros</h2>
               <Form libroCreate={bookCreate} setBooks={setBookCreate} />
             </div>
 

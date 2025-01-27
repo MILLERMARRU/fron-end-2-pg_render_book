@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+
 export const BookList = ({ libroCreate, book }) => {
   const { titulo, autor, edicion } = libroCreate;
 
@@ -11,8 +13,18 @@ export const BookList = ({ libroCreate, book }) => {
     )
       .then((response) => response.json())
       .then(() => {
-        alert("Libro eliminado con exito");
-        window.location.reload();
+        Swal.fire({
+          title: "Delete!",
+          text: "El libro ha sido eliminado con con exito.",
+          icon: "error",
+          timer: 3000,
+          showConfirmButton: false,
+        });
+      })
+      .then(() => {
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       });
   };
 
@@ -20,7 +32,7 @@ export const BookList = ({ libroCreate, book }) => {
     const parsedEdicion = parseInt(edicion, 10);
     //validación de los datos
     if (titulo === "" || autor === "" || parsedEdicion <= 0) {
-      alert("Todos los campos son obligatorios");
+      Swal.fire("Error", "Por favor llene todo los campos", "warning");
       return;
     }
 
@@ -42,8 +54,19 @@ export const BookList = ({ libroCreate, book }) => {
     )
       .then((response) => response.text())
       .then(() => {
-        alert("Libro actualizado con exito");
-        window.location.reload();
+        Swal.fire({
+          title: "Exito!",
+          text: "El libro ha sido actualizado correctamente.",
+          icon: "success",
+          timer: 3000,
+          showConfirmButton: false,
+        });
+      
+      })
+      .then(() => {
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       })
       .catch((error) => console.error("Error al actualizar el libro:", error));
   };
@@ -74,7 +97,7 @@ export const BookList = ({ libroCreate, book }) => {
                       onClick={() => {
                         handleUpdate(book.id);
                       }}
-                      className="btn btn-primary"
+                      className="btn btn-primary btn-decor-edit"
                     >
                       <i className="bi bi-pencil"></i>
                     </button>
@@ -83,9 +106,9 @@ export const BookList = ({ libroCreate, book }) => {
                       onClick={() => {
                         handleDelete(book.id);
                       }}
-                      className="btn btn-danger"
+                      className="btn btn-danger btn-decor"
                     >
-                      <i className="bi bi-trash3"></i> 
+                      <i className="bi bi-trash3"></i>
                     </button>
                   </div>
                 </td>

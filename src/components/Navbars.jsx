@@ -5,6 +5,7 @@ export const Navbars = ({ brand }) => {
         <div className="container">
           <a className="navbar-brand" href="#!">
             {brand}
+            <i className="bi bi-person ms-2"></i>
           </a>
         </div>
       </nav>
