@@ -1,74 +1,86 @@
 import Swal from "sweetalert2";
 
+// Configuración Supabase
+const SUPABASE_URL = "https://mvvwbvozjthaiuinazuz.supabase.co/rest/v1/libro";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im12dndidm96anRoYWl1aW5henV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA2OTQ4NDUsImV4cCI6MjA2NjI3MDg0NX0.SWJrO2E80Zfgr4QnFvjm6OiPEb5O7X-SIvj0pFEbZ_A"; // Pega tu anon key completa
+
 export const BookList = ({ libroCreate, book }) => {
   const { titulo, autor, edicion } = libroCreate;
 
-  const handleDelete = (id) => {
-    const requesInit = {
-      method: "DELETE",
-    };
-    fetch(
-      "https://back-end-2-pg-render-book.onrender.com/api/" + id,
-      requesInit
-    )
-      .then((response) => response.json())
-      .then(() => {
-        Swal.fire({
-          title: "Delete!",
-          text: "El libro ha sido eliminado con con exito.",
-          icon: "error",
-          timer: 3000,
-          showConfirmButton: false,
-        });
-      })
-      .then(() => {
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch(`${SUPABASE_URL}?id=eq.${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          apikey: SUPABASE_KEY,
+          Authorization: `Bearer ${SUPABASE_KEY}`,
+          Prefer: "return=minimal",
+        },
       });
+
+      if (!response.ok) {
+        throw new Error("Error al eliminar el libro");
+      }
+
+      Swal.fire({
+        title: "Eliminado",
+        text: "El libro ha sido eliminado exitosamente.",
+        icon: "success",
+        timer: 3000,
+        showConfirmButton: false,
+      });
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    } catch (error) {
+      console.error("Error al eliminar:", error);
+    }
   };
 
-  const handleUpdate = (id) => {
+  const handleUpdate = async (id) => {
     const parsedEdicion = parseInt(edicion, 10);
-    //validación de los datos
     if (titulo === "" || autor === "" || parsedEdicion <= 0) {
-      Swal.fire("Error", "Por favor llene todo los campos", "warning");
+      Swal.fire("Error", "Por favor llene todos los campos", "warning");
       return;
     }
 
-    const requesInit = {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        titulo,
-        autor,
-        edicion: parsedEdicion,
-      }),
-    };
+    try {
+      const response = await fetch(`${SUPABASE_URL}?id=eq.${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          apikey: SUPABASE_KEY,
+          Authorization: `Bearer ${SUPABASE_KEY}`,
+          Prefer: "return=minimal",
+        },
+        body: JSON.stringify({
+          titulo,
+          autor,
+          edicion: parsedEdicion,
+        }),
+      });
 
-    fetch(
-      "https://back-end-2-pg-render-book.onrender.com/api/" + id,
-      requesInit
-    )
-      .then((response) => response.text())
-      .then(() => {
-        Swal.fire({
-          title: "Exito!",
-          text: "El libro ha sido actualizado correctamente.",
-          icon: "success",
-          timer: 3000,
-          showConfirmButton: false,
-        });
-      
-      })
-      .then(() => {
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
-      })
-      .catch((error) => console.error("Error al actualizar el libro:", error));
+      if (!response.ok) {
+        throw new Error("Error al actualizar el libro");
+      }
+
+      Swal.fire({
+        title: "Actualizado",
+        text: "El libro ha sido actualizado correctamente.",
+        icon: "success",
+        timer: 3000,
+        showConfirmButton: false,
+      });
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
+    } catch (error) {
+      Swal.fire("Error", "No se pudo actualizar el libro.", "error");
+      console.error("Error al actualizar:", error);
+    }
   };
 
   return (
@@ -94,18 +106,13 @@ export const BookList = ({ libroCreate, book }) => {
                 <td className="text-center align-middle">
                   <div className="d-flex justify-content-center gap-2">
                     <button
-                      onClick={() => {
-                        handleUpdate(book.id);
-                      }}
+                      onClick={() => handleUpdate(book.id)}
                       className="btn btn-primary btn-decor-edit"
                     >
                       <i className="bi bi-pencil"></i>
                     </button>
-
                     <button
-                      onClick={() => {
-                        handleDelete(book.id);
-                      }}
+                      onClick={() => handleDelete(book.id)}
                       className="btn btn-danger btn-decor"
                     >
                       <i className="bi bi-trash3"></i>
